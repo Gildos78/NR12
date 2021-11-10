@@ -1,0 +1,260 @@
+<script type="text/ng-template" id="intervencoesModal.html">
+  <div class="modal-header">
+	<button class="close" ng-click="$ctrl.cancelarIntervencao()">&times;</button>
+	  <h3 class="modal-title">Intervenção</h3>
+  </div>
+  <div class="modal-body">
+	<form name="forminterv" novalidate>
+		<div class="row">
+		  <div class="form-group col-md-6" ng-class="{'has-error': forminterv.intervencao.$invalid && !forminterv.intervencao.$pristine}">
+				<label class="control-label" for="intervencao">Intervenção *</label>
+				<input type="text" class="form-control"  name="intervencao" id="intervencao" ng-model="$ctrl.intervencao.intervencao" required validate/>
+				</div>
+
+				<div class="form-group col-md-6">
+					
+					<label class="control-label" for="fotoit01">Foto Perigo</label>
+					<div class="input-group">
+					  <input file-input="fotoit01" type="file" name="fotoit01" id="fotoit01" ng-disabled="selFotoIT01" class="form-control" >
+					  <span class="input-group-btn">
+						<button ng-click="$ctrl.uploadIntervencao('fotoit01')" type="button" ng-disabled="btnFotoIT01"  class="btn btn-primary">
+						  <i class="glyphicon glyphicon-upload"></i>
+						  <span>Upload</span>
+						</button>
+					  </span>
+					</div>
+				</div>
+		</div>
+
+		<div class="row">
+			<div class="form-group col-md-6">
+			  <label class="control-label" for="perigo">Manutenção, inspeção, preparação, ajuste, reparo e limpeza (6.0)</label>
+			  <div class="input-group">
+				<select class="form-control" name="miparl" id="miparl" ng-model="$ctrl.miparlSelecionado" ng-options="miparl as miparl.nome for miparl in $ctrl.miparls | orderBy:'item'">
+				  <option value="">Selecione uma opção</option>
+				</select>
+				<span class="input-group-btn">
+				  <button type="button" class="btn" ng-class="{'btn-default':!$ctrl.miparlSelecionado, 'btn-success':$ctrl.miparlSelecionado}" ng-click="$ctrl.adicionaMiparl()" ng-disabled="!$ctrl.miparlSelecionado">
+					<span class="glyphicon glyphicon-plus"></span>
+				  </button>
+				</span>
+			  </div>
+			</div>
+  
+			  <div class="form-group col-md-6">
+				  <label class="control-label" for="risco">Manutenção, inspeção, preparação, ajuste, reparo e limpeza (6.1)</label>
+			  <div class="input-group">
+						  <select ng-model="$ctrl.miparl61Selecionado" name="miparl61" id="miparl61" class="form-control" ng-options="miparl61 as miparl61.nome for miparl61 in $ctrl.miparls61">
+							  <option value="">Selecione uma opção</option>
+						  </select>
+				<span class="input-group-btn">
+				  <button type="button" class="btn btn-default" ng-class="{'btn-default':!$ctrl.miparl61Selecionado, 'btn-success':$ctrl.miparl61Selecionado}" ng-click="$ctrl.adicionaMiparl61()" ng-disabled="!$ctrl.miparl61Selecionado">
+					<span class="glyphicon glyphicon-plus"></span>
+				  </button>
+				</span>
+			  </div>
+  
+			  </div>
+		  </div>
+		  <div class="row">
+			<div class="table-responsive col-md-6">
+			 <table class="table table-hover">
+			   <thead>
+				 <tr>
+				   <th>M.I.P.A.R.L. 6.0</th>
+				   <th>Ação</th>
+				 </tr>
+			   </thead>
+			   <tbody>
+				 <tr ng-repeat="miparl in $ctrl.intervencao.Miparls | orderBy:'id'">
+				   <td>{{miparl.nome}}</td>
+				   <td class="action">
+					 <button type="button" ng-click="$ctrl.removeMiparl(miparl)" class="btn btn-danger btn-xs" title="Excluir">
+					   <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					 </button>
+				   </td>
+				 </tr>
+			   </tbody>
+			 </table>
+			 </div>
+			 <div class="table-responsive col-md-6">
+			  <table class="table table-hover">
+				<thead>
+				  <tr>
+					<th>M.I.P.A.R.L. 6.1</th>
+					<th>Ação</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr ng-repeat="miparl61 in $ctrl.intervencao.miparls61 | orderBy:'id'">
+					<td>{{miparl61.nome}}</td>
+					<td class="action">
+					  <button type="button" ng-click="$ctrl.removeMiparl61(miparl61)" class="btn btn-danger btn-xs" title="Excluir">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					  </button>
+					</td>
+				  </tr>
+				</tbody>
+			  </table>
+			  </div>
+		  </div>
+
+		  <div class="row">
+			<div class="form-group col-md-6">
+			  <label class="control-label" for="perigo">Perigo</label>
+			  <div class="input-group">
+				<select class="form-control" name="perigo" id="perigo" ng-model="$ctrl.perigoSelecionado" ng-options="perigo as perigo.nome for perigo in $ctrl.perigos | orderBy:'item'">
+				  <option value="">Selecione uma opção</option>
+				</select>
+				<span class="input-group-btn">
+				  <button type="button" class="btn" ng-class="{'btn-default':!$ctrl.perigoSelecionado, 'btn-success':$ctrl.perigoSelecionado}" ng-click="$ctrl.adicionaPerigo()" ng-disabled="!$ctrl.perigoSelecionado">
+					<span class="glyphicon glyphicon-plus"></span>
+				  </button>
+				</span>
+			  </div>
+			</div>
+  
+			  <div class="form-group col-md-6">
+				  <label class="control-label" for="risco">Risco</label>
+			  <div class="input-group">
+						  <select ng-model="$ctrl.riscoSelecionado" name="risco" id="risco" class="form-control" ng-options="risco as risco.nome for risco in $ctrl.riscos">
+							  <option value="">Selecione uma opção</option>
+						  </select>
+				<span class="input-group-btn">
+				  <button type="button" class="btn btn-default" ng-class="{'btn-default':!$ctrl.riscoSelecionado, 'btn-success':$ctrl.riscoSelecionado}" ng-click="$ctrl.adicionaRisco()" ng-disabled="!$ctrl.riscoSelecionado">
+					<span class="glyphicon glyphicon-plus"></span>
+				  </button>
+				</span>
+			  </div>
+  
+			  </div>
+		  </div>
+		  <div class="row">
+			<div class="table-responsive col-md-6">
+			 <table class="table table-hover">
+			   <thead>
+				 <tr>
+				   <th>Perigo</th>
+				   <th>Ação</th>
+				 </tr>
+			   </thead>
+			   <tbody>
+				 <tr ng-repeat="perigo in $ctrl.intervencao.Perigos | orderBy:'id'">
+				   <td>{{perigo.nome}}</td>
+				   <td class="action">
+					 <button type="button" ng-click="$ctrl.removePerigo(perigo)" class="btn btn-danger btn-xs" title="Excluir">
+					   <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					 </button>
+				   </td>
+				 </tr>
+			   </tbody>
+			 </table>
+			 </div>
+			 <div class="table-responsive col-md-6">
+			  <table class="table table-hover">
+				<thead>
+				  <tr>
+					<th>Risco</th>
+					<th>Ação</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr ng-repeat="risco in $ctrl.intervencao.Riscos | orderBy:'id'">
+					<td>{{risco.nome}}</td>
+					<td class="action">
+					  <button type="button" ng-click="$ctrl.removeRisco(risco)" class="btn btn-danger btn-xs" title="Excluir">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					  </button>
+					</td>
+				  </tr>
+				</tbody>
+			  </table>
+			  </div>
+		  </div>  
+
+			<div class="row">
+			  <div class="form-group col-md-6">
+				<label class="control-label" for="sissegaplic">Sistemas de Segurança Aplicados</label>
+				<div class="input-group">
+				  <select class="form-control" name="sistemaSeguranca" id="sistemaSeguranca" ng-model="$ctrl.sistemaSegurancaSelecionado" ng-options="sistemaSeguranca as sistemaSeguranca.nome for sistemaSeguranca in $ctrl.sistemasSeguranca | orderBy:'item'">
+					<option value="">Selecione uma opção</option>
+				  </select>
+				  <span class="input-group-btn">
+					<button type="button" class="btn" ng-class="{'btn-default':!$ctrl.sistemaSegurancaSelecionado, 'btn-success':$ctrl.sistemaSegurancaSelecionado}" ng-click="$ctrl.adicionaSistemaSeguranca()" ng-disabled="!$ctrl.sistemaSegurancaSelecionado">
+					  <span class="glyphicon glyphicon-plus"></span>
+					</button>
+				  </span>
+				</div>
+			  </div>
+	
+			  <div class="form-group col-md-6">
+				<label class="control-label" for="sissegaplic">Sistemas de Segurança à Aplicar</label>
+				<div class="input-group">
+				  <select class="form-control" name="sistemaSeguranca2" id="sistemaSeguranca2" ng-model="$ctrl.sistemaSegurancaSelecionado2" ng-options="sistemaSeguranca as sistemaSeguranca.nome for sistemaSeguranca in $ctrl.sistemasSeguranca | orderBy:'item'">
+					<option value="">Selecione uma opção</option>
+				  </select>
+				  <span class="input-group-btn">
+					<button type="button" class="btn" ng-class="{'btn-default':!$ctrl.sistemaSegurancaSelecionado2, 'btn-success':$ctrl.sistemaSegurancaSelecionado2}" ng-click="$ctrl.adicionaSistemaSeguranca2()" ng-disabled="!$ctrl.sistemaSegurancaSelecionado2">
+					  <span class="glyphicon glyphicon-plus"></span>
+					</button>
+				  </span>
+				</div>
+			  </div>
+			</div>
+
+		  <div class="row">
+			<div class="table-responsive col-md-6">
+			 <table class="table table-hover">
+			   <thead>
+				 <tr>
+				   <th>Sistema de Seg. Aplicados</th>
+				   <th>Ação</th>
+				 </tr>
+			   </thead>
+			   <tbody>
+				 <tr ng-repeat="sistemaSeguranca in $ctrl.intervencao.SistemaSegurancas | orderBy:'id'">
+				   <td>{{sistemaSeguranca.nome}}</td>
+				   <td class="action">
+					 <button type="button" ng-click="$ctrl.removeSistemaSeguranca(sistemaSeguranca)" class="btn btn-danger btn-xs" title="Excluir">
+					   <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					 </button>
+				   </td>
+				 </tr>
+			   </tbody>
+			 </table>
+			 </div>
+			 <div class="table-responsive col-md-6">
+			  <table class="table table-hover">
+				<thead>
+				  <tr>
+					<th>Sistema de Seg. à Aplicar</th>
+					<th>Ação</th>
+				  </tr>
+				</thead>
+				<tbody>
+				  <tr ng-repeat="sistemaSeguranca2 in $ctrl.intervencao.SistemaSeguranca2s | orderBy:'id'">
+					<td>{{sistemaSeguranca2.nome}}</td>
+					<td class="action">
+					  <button type="button" ng-click="$ctrl.removeSistemaSeguranca2(sistemaSeguranca2)" class="btn btn-danger btn-xs" title="Excluir">
+						<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+					  </button>
+					</td>
+				  </tr>
+				</tbody>
+			  </table>
+			  </div>
+			  <div class="table-responsive col-md-7">
+				<img ng-src="{{$ctrl.intervencao.fotoit01.show}}" class="img-responsive">
+			  </div>
+		  </div>
+		</form>
+		</div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-primary" ng-click="$ctrl.salvarIntervencao()" ng-disabled="!forminterv.$valid">OK</button>
+		<button typpe="button" class="btn btn-warning" ng-click="$ctrl.cancelarIntervencao()" data-dismiss="modal">Cancelar</button>
+	  </div>
+	  <!--<pre>{{formpontop | json}}</pre>-->
+  </div>
+</div>
+</script>
+<div class="modal-parent"></div>

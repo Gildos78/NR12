@@ -1,0 +1,60 @@
+<div id="top" class="row">
+	<div class="col-xs-12 col-md-3">
+		<h2>Manuais</h2>
+	</div>
+	<div class="col-xs-9 col-md-6">
+		<div class="input-group h2">
+			<span class="input-group-addon">
+				<span class="glyphicon glyphicon-search"></span>
+			</span>
+			<input class="form-control" type="text" placeholder="Pesquisar" ng-model="filtro" />
+		</div>
+	</div>
+	<div class="col-xs-3 col-md-3">
+		<a ng-href="#/manual" class="btn btn-primary pull-right h2">Novo</a>
+	</div>
+</div><!-- /#TOP -->
+
+<div id="list" class="row">
+	<div class="table-responsive col-md-12">
+		<table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Título</th>
+					<th class="actions">Ação</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="manual in controller.manuais | filter:filtro"><!--manual(Objeto) in manuais(Lista/array)-->
+					<td>
+						<a ng-href="#/manual/view/{{manual.id}}">{{manual.nome}}</a>
+					</td>
+					<td class="actions">
+						<a ng-href="#/manual/view/{{manual.id}}" class="btn btn-success btn-xs" title="Visualizar">
+							<span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+						</a>
+						<a ng-href="#/manual/{{manual.id}}" class="btn btn-warning btn-xs" title="Editar">
+							<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+						</a>
+						<button ng-click="controller.remove(manual)" class="btn btn-danger btn-xs" title="Excluir">
+							<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+			<tfoot>
+				<tr>
+					<td colspan="3">
+						<p ng-show="controller.manuais.length">Manuais cadastrados: {{controller.manuais.length}}</p>
+						<p class="text-info" ng-hide="controller.manuais.length">Não há manuais cadastrados</p>
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</div>
+</div> <!-- /#list -->
+<div id="botton" class="row">
+	<div class="col-md-12">
+		<!-- Paginação -->
+	</div>
+</div>

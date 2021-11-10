@@ -1,0 +1,65 @@
+<div>
+	<h3>Disposições Finais</h3>
+	<div class="row">
+		<div class="table-responsive col-md-12">
+	
+					
+				
+					<!-- <tr ng-repeat="pontoPerigo in controller.laudo.pontoPerigos | filter:controller.filtroPontoPerigo"> -->
+					
+						
+					
+							<h4 style="text-align: center;">Descrição</h4>
+							
+						<form>
+						<table>
+							<tr>
+								<td colspan="2">
+									<input type="radio" id=1 ng-value="controller.disposicaoFinais[0]" name="descricao" ng-model="controller.disposicaoFinalSelec" ng-checked="controller.checked1" ng-click="controller.adicionaDisposicaoFinal1()">
+									&nbsp;&nbsp;
+									<span ng-show="controller.disposicaoFinais"> {{controller.disposicaoFinais[0].descricao}}</span>
+								</td>
+							</tr>	
+							<tr>
+								<td colspan="2">
+									<input type="radio" id=2 ng-value="controller.disposicaoFinais[1]" name="descricao" ng-model="controller.disposicaoFinalSelec" ng-checked="controller.checked2" ng-click="controller.adicionaDisposicaoFinal1()">
+									&nbsp;&nbsp;
+									<span ng-show="controller.disposicaoFinais"> {{controller.disposicaoFinais[1].descricao}}</span>
+								</td>	
+							</tr>
+							<tr>
+								<td colspan="2">
+									<input type="radio" id=3 ng-value="controller.disposicaoFinais[2]" name="descricao" ng-model="controller.disposicaoFinalSelec" ng-checked="controller.checked3" ng-click="controller.adicionaDisposicaoFinal1()">
+									&nbsp;&nbsp;
+									<span ng-show="controller.disposicaoFinais"> {{controller.disposicaoFinais[2].descricao}}</span>
+								</td>	
+							</tr>
+							
+				
+						</table>
+						</form>
+						<br>
+					
+						<br>
+						<h4 style="text-align: center;">Parecer Técnico</h4>
+						
+						<table>
+									<tr rowspan="3">
+										<td colspan="2" >
+												<input type="radio" id="check4" ng-value="controller.disposicaoFinais[3]" name="parecerTecnico" ng-model="controller.disposicaoFinalSelec2" ng-checked="controller.checked4" ng-click="controller.adicionaDisposicaoFinal2()">
+												&nbsp;&nbsp;
+												<span ng-show="controller.disposicaoFinais"> {{controller.disposicaoFinais[3].descricao}}</span>
+										</td>
+									</tr>	
+									<tr rowspan="3">
+										<td colspan="2">
+											<input type="radio" id="check5" ng-value="controller.disposicaoFinais[4]" name="parecerTecnico" ng-model="controller.disposicaoFinalSelec2" ng-checked="controller.checked5" ng-click="controller.adicionaDisposicaoFinal2()">
+											&nbsp;&nbsp;
+											<span ng-show="controller.disposicaoFinais"> {{controller.disposicaoFinais[4].descricao}}</span>
+										</td>	
+									</tr>
+							</table>		
+		</div>
+	</div>
+</div>
+	

@@ -1,0 +1,25 @@
+<div class="col-sm-8 col-sm-offset-2">
+	<h2 class="page-header">Disposições Finais</h2>
+	<div class="tab-content">
+		<div class="row">
+			<div class="col-md-12">
+				<p><strong>Título: </strong></p>
+				<p>{{controller.disposicaoFinal.nome}}</p>
+			</div>
+			</div>
+		<div class="row">
+			<div class="col-md-12">
+				<p><strong>Descrição</strong></p>
+				<textarea class="form-control" rows="10" name="descricao"
+				ng-model="controller.disposicaoFinal.descricao" disabled="true"/>
+			</div>
+		</div>
+		<hr />
+			<div id="actions" class="row">
+			<div class="col-md-12">
+				<a ng-href="#/disposicaoFinal/{{controller.disposicaoFinal.id}}" class="btn btn-warning">Editar</a>
+				<a back class="btn btn-default">Voltar</a>
+			</div>
+		</div>
+	</div>
+</div>

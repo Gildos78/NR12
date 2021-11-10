@@ -1,0 +1,57 @@
+<div class="col-sm-8 col-sm-offset-2">
+	<h3>Instalacoes e Dispositivos Elétricos</h3>
+	<div class="row">
+		<div class="col-md-12">
+			<label class="control-label" for="">Instalacoes e Dispositivos Elétricos</label>
+			<div class="input-group">
+				<select ng-model="controller.instalacoesDispEletricoSelec" name="instalacoesDispEletrico"
+					class="form-control"
+					ng-options="instalacoesDispEletrico as instalacoesDispEletrico.nome for instalacoesDispEletrico in controller.instalacoesDispEletricos track by instalacoesDispEletrico.id" ng-change="controller.changeInstalacao()">
+					<option value="">Selecione uma opção</option>
+				</select>
+				<span class="input-group-btn">
+					<button type="button" class="btn" ng-class="{'btn-default':!controller.instalacoesDispEletricoSelec, 'btn-success':controller.instalacoesDispEletricoSelec}" ng-click="controller.adicionaInstalacoesDispEletrico()" ng-disabled="controller.btnIncluirInstalacao">
+						<span class=" glyphicon glyphicon-plus"></span>
+					</button>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="table-responsive col-md-12">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Instalação e Dispositivos Elétricos</th>
+						<th>Descrição</th>
+						<th class="actions">Ação</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="instalacao in controller.laudo.instalacoesDispEletricos">
+						<td>
+							{{instalacao.nome}}
+						</td>
+						<td>
+							{{instalacao.descricao | limitTo: 50}}
+						</td>
+						<td class="actions">
+							<button ng-click="controller.removeInstalacoesDispEletrico(instalacao)" class="btn btn-danger btn-xs" title="Excluir">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="3">
+							<p ng-show="controller.laudo.instalacoesDispEletricos.length">Instalações e dispositivos elétricos cadastrados: {{controller.laudo.instalacoesDispEletricos.length}}</p>
+							<p class="text-info" ng-hide="controller.laudo.instalacoesDispEletricos.length">Não há instalações e dispositivos elétricos cadastrados</p>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+

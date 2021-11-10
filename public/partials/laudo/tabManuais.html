@@ -1,0 +1,57 @@
+<div class="col-sm-8 col-sm-offset-2">
+	<h3>Manual</h3>
+	<div class="row">
+		<div class="col-md-12">
+			<label class="control-label" for="">Manual</label>
+			<div class="input-group">
+				<select ng-model="controller.manualSelec" name="manual"
+					class="form-control"
+					ng-options="manual as manual.nome for manual in controller.manuais track by manual.id" ng-change="controller.changeManu()">
+					<option value="">Selecione uma opção</option>
+				</select>
+				<span class="input-group-btn">
+					<button type="button" class="btn" ng-class="{'btn-default':!controller.manualSelec, 'btn-success':controller.manualSelec}" ng-click="controller.adicionaManual()" ng-disabled="controller.btnIncluirManu">
+						<span class=" glyphicon glyphicon-plus"></span>
+					</button>
+				</span>
+			</div>
+		</div>
+	</div>
+	<div class="row">
+		<div class="table-responsive col-md-12">
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Manual</th>
+						<th>Descrição</th>
+						<th class="actions">Ação</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="manu in controller.laudo.manuais">
+						<td>
+							{{manu.nome}}
+						</td>
+						<td>
+							{{manu.descricao | limitTo: 50}}
+						</td>
+						<td class="actions">
+							<button ng-click="controller.removeManual(manu)" class="btn btn-danger btn-xs" title="Excluir">
+								<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+							</button>
+						</td>
+					</tr>
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="3">
+							<p ng-show="controller.laudo.manuais.length">Manuais cadastrados: {{controller.laudo.manuais.length}}</p>
+							<p class="text-info" ng-hide="controller.laudo.manuais.length">Não há manuais cadastrados</p>
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+		</div>
+	</div>
+</div>
+

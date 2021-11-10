@@ -1,0 +1,97 @@
+	<div id="listIntervencoes">  
+		<div class="row">
+			<div class="col-xs-12 col-md-3">
+				<h3>Intervenções</h3>
+			</div>
+			<div class="col-xs-9 col-md-6">
+				<div class="input-group h2">
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-search"></span>
+					</span>
+					<input class="form-control" type="text" placeholder="Pesquisar" ng-model="controller.filtroIntervencao" />
+				</div>
+			</div>
+			<div class="col-xs-3 col-md-3">
+	
+				<button type="button" class="btn btn-primary pull-right h2" ng-click="controller.novoIntervencao()">Novo</button>
+	
+				<!-- <button type="button" class="btn btn-primary pull-right h2" data-toggle="modal" data-target="#novoPerigo" ng-click="controller.novoPontoPerigo()">Novo</button> -->
+	
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="table-responsive col-md-12">
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>Intervenções</th>
+							<th>M.I.P.A.R.L. 6.0</th>
+							<th>M.I.P.A.R.L. 6.1</th>
+							<th>Perigos</th>
+							<th>Riscos</th>
+							<th>Segurança aplicada</th>
+							<th>Segurança à aplicar</th>
+							<th class="actions">Ação</th>
+						</tr>
+					</thead>
+					<tbody>
+						<!-- <tr ng-repeat="pontoPerigo in controller.laudo.pontoPerigos | filter:controller.filtroPontoPerigo"> -->
+						<tr ng-repeat="intervencao in controller.laudo.intervencoes | filter:controller.filtroIntervencao:false">
+							<td>{{intervencao.intervencao}}</td>
+							<td class="per">
+								<ul class="list-inline">
+									<li ng-repeat="miparl in intervencao.Miparls"><span class="perigo">{{miparl.nome}}<span></li>
+								</ul>
+							</td>
+							<td class="per">
+								<ul class="list-inline">
+									<li ng-repeat="miparl61 in intervencao.miparls61"><span class="perigo">{{miparl61.nome}}<span></li>
+								</ul>
+							</td>
+							<td class="per">
+								<ul class="list-inline">
+									<li ng-repeat="perigo in intervencao.Perigos"><span class="perigo">{{perigo.nome}}<span></li>
+								</ul>
+							</td>
+							<td class="per">
+								<ul class="list-inline">
+									<li ng-repeat="risco in intervencao.Riscos"><span class="perigo">{{risco.nome}}<span></li>
+								</ul>
+							</td>
+							<td class="per">
+								<ul class="list-inline">
+									<li ng-repeat="sistemaSeguranca in intervencao.SistemaSegurancas"><span class="perigo">{{sistemaSeguranca.nome}}<span></li>
+								</ul>
+							</td>
+							<td class="per">
+								<ul class="list-inline">
+									<li ng-repeat="sistemaSeguranca2 in intervencao.SistemaSeguranca2s"><span class="perigo">{{sistemaSeguranca2.nome}}<span></li>
+								</ul>
+							</td>
+							
+							<td class="actions">
+	
+								<a class="btn btn-warning btn-xs" title="Editar" ng-click="controller.editaIntervencao(intervencao, $index)">
+									<span class="glyphicon glyphicon-pencil" aria-hidden="true" ></span>
+								</a>
+	
+								<button type="button" class="btn btn-danger btn-xs" title="Excluir" ng-click="controller.removeIntervencao(intervencao, $index)">
+									<span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+								</button>
+							</td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="5">
+								<p ng-show="controller.laudo.intervencoes.length">Intervenções cadastradas: {{controller.laudo.intervencoes.length}}</p>
+								<p class="text-info" ng-hide="controller.laudo.intervencoes.length">Não há Intervenções cadastradas</p>
+							</td>
+						</tr>
+					</tfoot>
+				</table>
+			</div>
+		</div>
+	</div>
+	
